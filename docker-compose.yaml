@@ -12,6 +12,7 @@ services:
   mongo-express:
     image: mongo-express
     container_name: mongo-express
+    hostname: mongo-express
     restart: always
     ports:
       - "9999:8081"
@@ -58,6 +59,7 @@ services:
   kafka-ui:
     image: provectuslabs/kafka-ui
     container_name: kafka-ui
+    hostname: kafka-ui
     ports:
       - "8089:8080"
     restart: always
@@ -65,5 +67,3 @@ services:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
-
-
