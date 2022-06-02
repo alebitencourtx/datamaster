@@ -37,7 +37,7 @@ Segue desenho de infraestrutura:
 Este processo realiza extração dos Tweets utilizando a [API v2 e o endpoint de busca rescente](https://developer.twitter.com/en/docs/twitter-api/tweets/search/api-reference/get-tweets-search-recent).\
 O motor realiza a busca do termo "santander" onde o tweet não seja uma reply nem um retweet.
 O processo foi desenvolvido utilizando Python + Tweepy, e envia os dados extraídos para o MongoDB na estrutura:
-```json
+```shell
     {'_id', 'json'{}, 'dat_ref_carga_batch'}
 
 ```
@@ -120,7 +120,7 @@ batch_bronze_tt_tweets
 docker exec -ti jupyter-pyspark sh /app/twitter/bronze/batch/start_batch_bronze_tt_tweets.sh 150
 ```
 
-treaming_bronze_tt_tweets_extract
+streaming_bronze_tt_tweets_extract
 
 ```bash
 docker exec -ti jupyter-pyspark sh /app/twitter/bronze/streaming/extract/start_streaming_bronze_tt_tweets_extract.sh
