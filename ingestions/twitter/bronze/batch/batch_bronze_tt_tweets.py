@@ -22,7 +22,7 @@ def monta_json(tweet):
     """
     # Define a data atual com timezone
     now = current_time_sp()
-    # Recebe o tweet e monta na estrutura {'_id', 'json'{}, 'dat_ref_carga_atlz'}
+    # Recebe o tweet e monta na estrutura {'_id', 'json'{}, 'dat_ref_carga_batch'}
     dict_raw = tweet    
     dict_final = {}
     dict_final["_id"] = dict_raw['data']["id"]
