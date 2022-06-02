@@ -9,7 +9,7 @@ Segue desenho de solução macro contendo todos os componentes:
 
 ![Bronze Layer](img/bronze_layer.jpeg "bronze_layer")
 
-![Silver Layer](img/silver_layer.jpeg "silver_layer")
+![Silver Layer](img/silver_layer.jpg "silver_layer")
 
 A infraestrutura foi montada utilizando containers no Docker com docker-compose. 
 Segue desenho de infraestrutura:
