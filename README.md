@@ -81,12 +81,12 @@ Para que isso seja possível, o :_id" do documento em cada tabela foi populado c
 #### streaming_bronze_tt_tweets_extract:
 
 Foi desenvolvido um script Python que também utiliza o Tweepy e Twitter API v2 para consulta, mas desta vez envia os dados para um tópico Kafka. \
-Foi utiliada a class [StreamingClient](https://docs.tweepy.org/en/latest/streamingclient.html#tweepy.StreamingClient) para o recebimento contínuo das mensagens. Este processo utiliza exatamente a mesma query de consulta ao endpoit. \
+Foi utilizada a class [StreamingClient](https://docs.tweepy.org/en/latest/streamingclient.html#tweepy.StreamingClient) para o recebimento contínuo das mensagens. Este processo utiliza exatamente a mesma query de consulta ao endpoit. \
 O dado é enviado ao tópico Kafka utilizando a biblioteca [kafka-python](https://kafka-python.readthedocs.io/en/master/).
 
 
 #### streaming_bronze_tt_tweets_load:
-Utilizando o Spark Structured Streaming, o motor realiza a leitura do tópico citado anteriormente, aplica um tratamento de saneamento no Json e insere no MongoDB. \
+Usando o Spark Structured Streaming, o motor realiza a leitura do tópico citado anteriormente, aplica um tratamento de saneamento no Json e insere no MongoDB. \
 Um ponto importante é que a carga é realizada na mesma tabela (Collection) do MongoDB onde o processo Batch insere. Com isso, temos uma Arquitetura Lambda de ingestão dos dados. \
 Devido a isso, foram criadas duas colunas de controle na tabela. São elas:
  - dat_ref_carga_batch
@@ -99,17 +99,17 @@ Devido a isso, foram criadas duas colunas de controle na tabela. São elas:
  #### batch_silver_tt_tweets:
  
 Processo de carga dos dados de tweets extraídos anteriormente no formato tabular, refiado com filtros de coluna, levando apenas o pertinente para a camada Silver. \
-Neste motor, foi utilizado o PySpark para extração do MongoDB, transformação da estrutura dos dados para um formato tabular e carga num diretório no fomato Delta (.parquet). \
+Neste motor, foi utilizado o PySpark para extração do MongoDB, transformação da estrutura dos dados para um formato tabular e carga num diretório no formato Delta (.parquet). \
 O Delta Lake foi escolhido como repositório de dados neste projeto principalmente por: \ 
 
- 1- Possíbilidade de realizar update das informações (merge) e; \
+ 1- Possibilidade de realizar update das informações (merge) e; \
  2- Possibilitar consultas analíticas em versões anteriores do dado ([Time Travel](https://databricks.com/blog/2019/02/04/introducing-delta-time-travel-for-large-scale-data-lakes.html))
 
 Devido a volumetria imaginada para este fluxo, o dado final foi particionado pela data (YYYY-MM-DD) com base na data de criação do tweet.
  
  #### batch_silver_yt_videos:
 
- Processo muito semelhante ao anterior, onde o PySpark realiza a estração das informações de videos do MongoDB, estrutura os dados e grava no formato Delta.
+ Processo muito semelhante ao anterior, onde o PySpark realiza a extração das informações de vídeos do MongoDB, estrutura os dados e grava no formato Delta.
  Por ter baixa volumetria, este processo sempre realiza extração e carga full.
 
 ## Execução dos Motores
